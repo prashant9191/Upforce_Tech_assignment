@@ -109,21 +109,24 @@ const customStyles = {
         style: {
             fontSize:"17px",
             color:"white",
-            backgroundColor:"black"
+            backgroundColor:"black",
+            zIndex:"1"
         }
     },
     cells: {
         style: {
           fontSize: "17px",
           fontWeight: "550", // Reset font weight for cells
+          
+            zIndex:"1"
         },
       },
    
 };
   return (
-    <div>
-      <h1>table</h1>
-      <DataTable columns={columns} data={users} customStyles={customStyles}  pagination fixedHeader fixedHeaderScrollHeight="450px" highlightOnHover  />
+    <div id="parent_div">
+      <h1 className="user_table_heading">User's Details Table</h1>
+      <DataTable columns={columns} data={users} customStyles={customStyles}   pagination fixedHeader fixedHeaderScrollHeight="450px" highlightOnHover    style={{ zIndex: 1 }}  />
     </div>
   );
 };

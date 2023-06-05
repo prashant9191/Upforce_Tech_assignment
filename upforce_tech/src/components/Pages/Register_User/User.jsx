@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import "./style.scss";
+import axios from "axios";
 import image from "../../../assets/avt.png";
-import apis from "../../utils/api";
-const createUserfromApi=apis.createUserfromApi;
+// import apis from "../../utils/api";
+// const createUserfromApi=apis.createUserfromApi;
 const User = () => {
   const [formData, setFormData] = useState({
     firstName: "",
-    lastName: "",
+    lastName:"",
     email: "",
+    password: "Defaultpassword",
     mobile: "",
     gender: "",
     status: "",
-    avatar: "",
-    location: "",
+    profile: "",
+    address: "",
   });
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -25,10 +26,23 @@ const User = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const transformedData = {
+      fullname: `${formData.firstName} ${formData.lastName}`,
+      email: formData.email,
+      password: formData.password,
+      mobile: formData.mobile,
+      gender: formData.gender,
+      status: formData.status,
+      profile: formData.profile,
+      address: formData.address
+    };
+    
     try {
-      console.log(formData)
-      let { statusCode, message }= await createUserfromApi(formData);
-      console.log({ statusCode, message });
+      const response = await axios.post(
+        "https://upforce-tech.onrender.com/user/register",
+        transformedData
+      );
+      console.log(response.data);
       // Handle the response from the API as needed
     } catch (error) {
       console.log(error);
@@ -41,7 +55,7 @@ const User = () => {
       <h2>Register Your Details</h2>
       <form onSubmit={handleSubmit}>
         <div className="profileImage">
-          <img src={image} alt="" />
+        <img src={formData.profile ? formData.profile : image} alt="" />
         </div>
         <div>
           <div>
@@ -95,8 +109,8 @@ const User = () => {
                 <input
                   type="radio"
                   name="gender"
-                  value="male"
-                  checked={formData.gender === "male"}
+                  value="Male"
+                  checked={formData.gender === "Male"}
                   onChange={handleChange}
                 />
                 <p>Male</p>
@@ -105,8 +119,8 @@ const User = () => {
                 <input
                   type="radio"
                   name="gender"
-                  value="female"
-                  checked={formData.gender === "female"}
+                  value="Female"
+                  checked={formData.gender === "Female"}
                   onChange={handleChange}
                 />
                 <p>Female</p>
@@ -122,19 +136,19 @@ const User = () => {
                 onChange={handleChange}
               >
                 <option value="">Select..</option>
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
               </select>
             </div>
           </div>
         </div>
         <div>
           <div>
-            <label htmlFor="avatar">Choose a profile picture:</label>
+            <label htmlFor="profile">Choose a profile picture:</label>
             <input
               type="file"
-              id="avatar"
-              name="avatar"
+              id="profile"
+              name="profile"
               accept="image/png, image/jpeg"
               onChange={handleChange}
             />
@@ -143,9 +157,9 @@ const User = () => {
             <p>Enter Your Location</p>
             <input
               type="text"
-              name="location"
+              name="address"
               placeholder="Enter Your Location"
-              value={formData.location}
+              value={formData.address}
               onChange={handleChange}
             />
           </div>
