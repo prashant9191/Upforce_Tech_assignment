@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./style.scss";
 import image from "../../../assets/avt.png";
-
+import apis from "../../utils/api";
+const createUserfromApi=apis.createUserfromApi;
 const User = () => {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -22,10 +23,17 @@ const User = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    // Perform further actions with the form data, such as sending it to an API
+    try {
+      console.log(formData)
+      let { statusCode, message }= await createUserfromApi(formData);
+      console.log({ statusCode, message });
+      // Handle the response from the API as needed
+    } catch (error) {
+      console.log(error);
+      // Handle any errors that occurred during the API request
+    }
   };
 
   return (

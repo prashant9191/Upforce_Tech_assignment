@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:4500/user";
+const BASE_URL = "https://upforce-tech.onrender.com/user";
 
 
 const fetchDataFromApi = async () => {
@@ -19,6 +19,7 @@ const createUserfromApi=async(payload)=>{
         const response = await axios.post(BASE_URL + "/register", payload);
         const statusCode = response.status;
         const { message } = response.data;
+        console.log(payload)
         return { statusCode, message };
     } catch (error) {
         console.log(error)
