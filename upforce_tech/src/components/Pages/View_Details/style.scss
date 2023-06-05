@@ -1,0 +1,38 @@
+#viewUser {
+  width: 90%;
+  margin: auto;
+.Value_text{
+    font-size: 20px;
+    margin: 5px 0;
+}
+  & > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 250px;
+      height: 250px;
+      object-fit: contain;
+      border-radius: 50%;
+      margin: 15px 0;
+    }
+    & > div {
+        padding: 5px;
+        border-radius: 5px;
+        margin: 10px;
+        flex-basis:20%;
+        font-size: 15px;
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px,
+        rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    }
+  }
+}
+@media only screen and (max-width: 640px) {
+    #viewUser>div{
+        flex-direction: column;
+        &>div{
+            width: 100%;
+            text-align: center;
+        }
+    }
+}
