@@ -10,6 +10,9 @@ app.use(express.json());
 
 app.use(logger);
 app.use("/user",userRouter);
+app.use("/",(req,res)=>{
+    res.status(200).json({message:"Default Route"})
+})
 
 app.listen(process.env.port,async()=>{
     try {
