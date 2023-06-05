@@ -40,7 +40,7 @@ const ViewTable = () => {
         alert("Something went wrong");
       }
     } catch (error) {
-      console.log(error); // Handle any errors
+      console.log(error); 
     }
   };
   
@@ -116,9 +116,7 @@ const customStyles = {
     cells: {
         style: {
           fontSize: "17px",
-          fontWeight: "550", // Reset font weight for cells
-          
-            zIndex:"1"
+          fontWeight: "550",
         },
       },
    

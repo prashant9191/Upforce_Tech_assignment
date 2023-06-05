@@ -15,7 +15,7 @@ const Header = () => {
         <h3>LOGO</h3>
         <nav ref={navRef}>
           <a href="/addUser">Add User</a>
-          <a href="/details">Details Table</a>
+          <a href="/">Details Table</a>
           <button className="nav-btn nav-close-btn" onClick={showNavbar}>
             <FaTimes />
           </button>
