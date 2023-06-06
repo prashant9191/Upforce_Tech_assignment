@@ -32,14 +32,15 @@ header {
 	z-index: 9999999;
 }
 
-nav a {
+nav p {
 	margin: 0 1rem;
 	color: var(--textColor);
 	text-decoration: none;
 }
 
-nav a:hover {
+nav p:hover {
 	color: var(--secondaryColor);
+	cursor: pointer;
 }
 
 header .nav-btn {

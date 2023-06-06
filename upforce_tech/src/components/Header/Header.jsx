@@ -1,7 +1,9 @@
 import React, { useRef } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import "./style.scss";
 const Header = () => {
+  const navigate = useNavigate();
   const navRef = useRef();
   const showNavbar = () => {
     navRef.current.classList.toggle("responsive_nav");
@@ -14,8 +16,8 @@ const Header = () => {
       <header>
         <h3>LOGO</h3>
         <nav ref={navRef}>
-          <a href="/addUser">Add User</a>
-          <a href="/">Details Table</a>
+          <p  onClick={()=>navigate("/addUser")}>Add User</p>
+          <p onClick={()=>navigate("/")}>Details Table</p>
           <button className="nav-btn nav-close-btn" onClick={showNavbar}>
             <FaTimes />
           </button>
