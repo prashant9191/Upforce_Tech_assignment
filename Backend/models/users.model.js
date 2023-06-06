@@ -26,9 +26,9 @@ const userSchema = new mongoose.Schema({
   profile: {
     type: String,
     default: function() {
-      if (this.gender === 'Male') {
+      if (this.gender == 'Male') {
         return 'https://img.freepik.com/premium-vector/cartoon-man-elegant-human-resources_24877-17816.jpg?w=740';
-      } else if (this.gender === 'Female') {
+      } else if (this.gender == 'Female') {
         return 'https://img.freepik.com/premium-vector/beautiful-girl-with-long-black-hair-sweater_6138-239.jpg?w=740';
       }
       return '';
