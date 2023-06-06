@@ -44,8 +44,9 @@ for exporting csv file
 - http://localhost:4500/user/delete/:id
 
 <hr>
+
 - for searching users by name or email
-- method : GET
+-  method : GET
 -  http://localhost:4500/user/search/?name=prashant
 -  http://localhost:4500/user/search/?email=prashant@gmail.com
 
