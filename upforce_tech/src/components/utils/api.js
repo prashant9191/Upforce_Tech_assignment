@@ -4,7 +4,7 @@ const BASE_URL = "https://upforce-tech.onrender.com/user";
 
 const fetchDataFromApi = async () => {
   try {
-    const response = await axios.get(BASE_URL + "/");
+    const response = await axios.get(BASE_URL + "/?limit=100");
 
     return response;
   } catch (err) {
