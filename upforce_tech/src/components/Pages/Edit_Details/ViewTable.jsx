@@ -10,12 +10,14 @@ import "./style.scss";
 
 const fetchDataFromApi = api.fetchDataFromApi;
 const deleteUserFromApi = api.deleteUserFromApi;
+const exportCsv=api.exportCsv;
 
 const ViewTable = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [actionRowId, setActionRowId] = useState(null);
+  const [loading,setLoading]=useState(false)
 
   useEffect(() => {
     fetchData();
@@ -23,20 +25,26 @@ const ViewTable = () => {
 
   const fetchData = async () => {
     try {
+      setLoading(true)
       const response = await fetchDataFromApi();
       const fetchedUsers = response.data.users;
+      setLoading(false)
       setUsers(fetchedUsers);
     } catch (error) {
-      console.log(error); // Handle any errors
+      setLoading(false);
+      console.log(error);
     }
   };
 
   const deleteUser = async (id) => {
     try {
+      setLoading(true)
       await deleteUserFromApi(id);
+      setLoading(false)
       setUsers((prevUsers) => prevUsers.filter((user) => user._id !== id));
       alert(`User has been deleted from the DB`);
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
   };
@@ -52,8 +60,20 @@ const ViewTable = () => {
 
   const handleEditClick = (row) => {
     dispatch(storeEditData(row));
-    navigate("/addUser");
+    navigate("/editUser");
   };
+
+  const handelExport=async()=>{
+    try {
+      setLoading(true)
+      const response = await exportCsv();
+      console.log(response)
+      setLoading(false)
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
+  }
 
   const columns = [
     {
@@ -135,16 +155,30 @@ const ViewTable = () => {
   return (
     <div id="parent_div">
       <h1 className="user_table_heading">User's Details Table</h1>
-      <DataTable
-        columns={columns}
-        data={users}
-        customStyles={customStyles}
-        pagination
-        fixedHeader
-        fixedHeaderScrollHeight="450px"
-        highlightOnHover
-        style={{ zIndex: 1 }}
-      />
+      <div className="search_Div">
+        <div>
+          <input type="text" placeholder="Enter Name to Search..." />
+          <button>Search</button>
+        </div>
+        <div>
+          <button onClick={()=>navigate('/addUser')}>Add User</button>
+          <button onClick={()=>handelExport()} >Export to CSV</button>
+        </div>
+      </div>
+      {loading ? (
+        <h1 className="loading_Text">Loading... <br /> Please Wait</h1>
+      ) : (
+        <DataTable
+          columns={columns}
+          data={users}
+          customStyles={customStyles}
+          pagination
+          fixedHeader
+          fixedHeaderScrollHeight="450px"
+          highlightOnHover
+          style={{ zIndex: 1 }}
+        />
+      )}
     </div>
   );
 };

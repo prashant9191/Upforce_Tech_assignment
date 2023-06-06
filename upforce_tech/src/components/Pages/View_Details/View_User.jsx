@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import "./style.scss";
-import image from "../../../assets/avt.png";
 
 const View_User = () => {
   const viewData = useSelector(state => state.viewData);

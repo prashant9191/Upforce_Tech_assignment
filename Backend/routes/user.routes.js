@@ -29,21 +29,6 @@ userRouter.get('/', async (req, res) => {
     }
   });
 
-// Get user by ID
-userRouter.get('/:id', async (req, res) => {
-  const id = req.params.id;
-
-  try {
-    const user = await userModel.findById(id);
-    if (user) {
-      res.status(200).json(user);
-    } else {
-      res.status(404).json({ message: 'User not found' });
-    }
-  } catch (error) {
-    res.status(500).json({ message: 'Error retrieving user', error: error.message });
-  }
-});
 
 // Create a new user
 userRouter.post("/register", async (req, res) => {
@@ -157,6 +142,23 @@ userRouter.get('/export', async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ message: 'Error exporting users', error: error.message });
+  }
+});
+
+
+// Get user by ID
+userRouter.get('/:id', async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const user = await userModel.findById(id);
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      res.status(404).json({ message: 'User not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Error retrieving user', error: error.message });
   }
 });
 

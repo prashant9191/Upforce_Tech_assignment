@@ -7,7 +7,7 @@
     padding: 5px;
     border-radius: 5px;
     z-index: 10;
-    background-color: yellow;
+    background-color: #EEEEEE;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     &>div{
         display: flex;
@@ -44,4 +44,43 @@
 }
 #actionDiv>div:hover{
     cursor: pointer;
+}
+.loading_Text{
+    text-align: center;
+    font-size: 30px;
+    color: #1565C0;
+}
+.search_Div{
+    display: flex;
+    width: 90%;
+    margin: auto;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.search_Div input{
+    border: none;
+    width: 200px;
+    font-size: 14px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+.search_Div button{
+    border: none;
+    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin-left: 10px;
+    background-color: #B0BEC5;
+   
+}
+
+@media only screen and (max-width: 640px) {
+    .search_Div{
+        flex-direction: column;
+        gap: 20px;
+        margin-top: 10px;
+    }
 }

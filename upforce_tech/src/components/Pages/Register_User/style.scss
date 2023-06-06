@@ -70,6 +70,14 @@
   }
 
 }
+.loading_Text{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: #1565C0;
+}
 @media only screen and (max-width: 640px) {
     h2{
         font-size: 15px;

@@ -6,7 +6,7 @@ import User from "./components/Pages/Register_User/User";
 import PageNotFound from "./components/Pages/404/PageNotFound";
 import View_User from "./components/Pages/View_Details/View_User";
 import ViewTable from "./components/Pages/Edit_Details/ViewTable";
-
+import Edit_User from "./components/Pages/Edit_Details/Edit_User/Edit_User";
 function App() {
   return (
     <BrowserRouter>
@@ -15,6 +15,7 @@ function App() {
         <Route path="/" element={<ViewTable />} />
         <Route path="/addUser" element={<User />} />
         <Route path="/viewUser" element={<View_User />} />
+        <Route path="/editUser" element={<Edit_User />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>

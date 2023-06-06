@@ -2,20 +2,37 @@ import React, { useState } from "react";
 import { useSelector } from 'react-redux';
 import "./style.scss";
 import axios from "axios";
-import image from "../../../assets/avt.png";
+import image from "../../../../assets/avt.png";
 
-const User = () => {
-  const [loading,setLoading]=useState(false);
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "Defaultpassword",
-    mobile: "",
-    gender: "",
-    status: "",
-    profile: "",
-    address: "",
+const Edit_User = () => {
+    const [loading,setLoading]=useState(false);
+  const editData = useSelector(state => state.editData);
+  const [formData, setFormData] = useState(() => {
+    if (editData) {
+      return {
+        firstName: editData.fullname.split(" ")[0] || "",
+        lastName: editData.fullname.split(" ")[1] || "",
+        email: editData.email || "",
+        password: "Defaultpassword",
+        mobile: editData.mobile || "",
+        gender: editData.gender || "",
+        status: editData.status || "",
+        profile: editData.profile || "",
+        address: editData.address || "",
+      };
+    } else {
+      return {
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "Defaultpassword",
+        mobile: "",
+        gender: "",
+        status: "",
+        profile: "",
+        address: "",
+      };
+    }
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,35 +56,23 @@ const User = () => {
     };
     
     try {
-      setLoading(true);
-      const response = await axios.post(
-        "https://upforce-tech.onrender.com/user/register",
+        setLoading(true)
+      const response = await axios.put(
+        `https://upforce-tech.onrender.com/user/${editData._id}`,
         transformedData
       );
-      setLoading(false);
+      setLoading(false)
       console.log(response.data);
-        alert("User has been added to data")
-        setFormData({
-          firstName: "",
-          lastName: "",
-          email: "",
-          password: "Defaultpassword",
-          mobile: "",
-          gender: "",
-          status: "",
-          profile: "",
-          address: "",
-        })
+      alert('User has been updated')
     } catch (error) {
       setLoading(false);
       console.log(error);
- 
     }
   };
 
   return (
     <div className="user_Details">
-      <h2 >Register Your Details</h2>
+      <h2>Edit Your Details</h2>
       {loading && <h1 className="loading_Text">Please wait...</h1>}
       <form onSubmit={handleSubmit}>
         <div className="profileImage">
@@ -188,4 +193,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default Edit_User;
