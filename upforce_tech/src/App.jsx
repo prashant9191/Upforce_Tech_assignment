@@ -14,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<ViewTable />} />
         <Route path="/addUser" element={<User />} />
+        <Route path="/viewUser" element={<View_User />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>

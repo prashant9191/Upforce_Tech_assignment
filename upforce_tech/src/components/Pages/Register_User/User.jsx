@@ -1,20 +1,37 @@
 import React, { useState } from "react";
+import { useSelector } from 'react-redux';
 import "./style.scss";
 import axios from "axios";
 import image from "../../../assets/avt.png";
-// import apis from "../../utils/api";
-// const createUserfromApi=apis.createUserfromApi;
+
 const User = () => {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName:"",
-    email: "",
-    password: "Defaultpassword",
-    mobile: "",
-    gender: "",
-    status: "",
-    profile: "",
-    address: "",
+  const editData = useSelector(state => state.editData);
+  const [formData, setFormData] = useState(() => {
+    if (editData) {
+      return {
+        firstName: editData.fullname.split(" ")[0] || "",
+        lastName: editData.fullname.split(" ")[1] || "",
+        email: editData.email || "",
+        password: "Defaultpassword",
+        mobile: editData.mobile || "",
+        gender: editData.gender || "",
+        status: editData.status || "",
+        profile: editData.profile || "",
+        address: editData.address || "",
+      };
+    } else {
+      return {
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "Defaultpassword",
+        mobile: "",
+        gender: "",
+        status: "",
+        profile: "",
+        address: "",
+      };
+    }
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
