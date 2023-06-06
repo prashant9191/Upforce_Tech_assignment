@@ -20,7 +20,7 @@ const ViewTable = () => {
   const [actionRowId, setActionRowId] = useState(null);
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-console.log(users)
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -68,27 +68,32 @@ console.log(users)
   const handelExport = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("https://upforce-tech.onrender.com/user/export", { responseType: "blob" });
+      const response = await axios.get(
+        "https://upforce-tech.onrender.com/user/export",
+        { responseType: "blob" }
+      );
       const downloadUrl = URL.createObjectURL(new Blob([response.data]));
-  
+
       const link = document.createElement("a");
       link.href = downloadUrl;
       link.setAttribute("download", "users.csv");
       document.body.appendChild(link);
       link.click();
-  
+
       setLoading(false);
     } catch (error) {
       setLoading(false);
       console.log(error);
     }
   };
-  
+
   const handleSearch = () => {
     if (searchQuery === "") {
       fetchData();
     } else {
-      const filteredUsers = users.filter((user) => user.fullname.toLowerCase().includes(searchQuery.toLowerCase()));
+      const filteredUsers = users.filter((user) =>
+        user.fullname.toLowerCase().includes(searchQuery.toLowerCase())
+      );
       setUsers(filteredUsers);
     }
   };
@@ -119,8 +124,14 @@ console.log(users)
     },
     {
       name: "Profile",
-      selector: (row) => <img width={50} src={row.profile} />,
-    },
+      selector: (row) => (
+        <img
+          width={50}
+          src={row.profile || 'https://img.freepik.com/free-vector/illustration-businessman_53876-5856.jpg?w=740&t=st=1686024578~exp=1686025178~hmac=07b110aa2bc8901f10c56402e0901e5a6ec4d1a7f4737dec293e5a312a28da7c'}
+        />
+      ),
+    }
+    ,
     {
       name: "Actions",
       selector: (row) => (
